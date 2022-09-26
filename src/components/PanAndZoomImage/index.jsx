@@ -7,12 +7,13 @@ export default function PanAndZoomImage({ src }) {
     usePanAndZoom();
   return (
     <div
-      className="Image-container bg-red-500 h-screen"
+      className="Image-container flex-grow"
       ref={containerRef}
       onMouseDown={onMouseDown}
       onWheel={onWheel}
     >
       <div
+        className="bg-red-500"
         style={{
           transform: `translate(${translateX}px, ${translateY}px) scale(${scale})`,
         }}
