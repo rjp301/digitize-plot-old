@@ -1,5 +1,3 @@
-import { type } from "@testing-library/user-event/dist/type";
-
 const ZOOM_FACTOR = 0.1;
 const ZOOM_FACTOR_IN = 1 + ZOOM_FACTOR;
 const ZOOM_FACTOR_OUT = 1 - ZOOM_FACTOR;
@@ -11,13 +9,13 @@ export const types = {
 };
 
 export const startPan = (event) => ({
-  type: type.PAN_START,
+  type: types.PAN_START,
   clientX: event.clientX,
   clientY: event.clientY,
 });
 
 export const pan = (event) => ({
-  type: type.PAN,
+  type: types.PAN,
   clientX: event.clientX,
   clientY: event.clientY,
 });

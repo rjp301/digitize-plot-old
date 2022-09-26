@@ -1,10 +1,14 @@
-import { useRef, useReducer } from "react";
+import { useRef, useReducer, useEffect } from "react";
 import reducer, { initialState } from "./reducer";
 import { pan, startPan, zoom } from "./actions";
 
 export default function usePanAndZoom() {
   const [state, dispatch] = useReducer(reducer, initialState);
   const containerRef = useRef(null);
+
+  useEffect(() => {
+    console.log(state);
+  }, [state]);
 
   const onMouseMoveInWindow = (event) => {
     event.preventDefault();
@@ -28,7 +32,7 @@ export default function usePanAndZoom() {
       dispatch(zoom(event, containerRect));
     }
   };
-  
+
   return {
     ...state,
     containerRef,

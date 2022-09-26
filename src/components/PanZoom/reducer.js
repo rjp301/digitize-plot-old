@@ -4,7 +4,7 @@ export const initialState = {
   translateY: 0,
   prevMouseX: 0,
   prevMouseY: 0,
-  scale: 1,
+  scale: 1
 };
 
 export default function reducer(state, action) {
@@ -15,7 +15,7 @@ export default function reducer(state, action) {
         prevMouseX: action.clientX,
         prevMouseY: action.clientY,
       };
-    
+
     case types.PAN:
       const deltaMouseX = action.clientX - state.prevMouseX;
       const deltaMouseY = action.clientY - state.prevMouseY;
@@ -26,7 +26,7 @@ export default function reducer(state, action) {
         prevMouseX: action.clientX,
         prevMouseY: action.clientY,
       };
-    
+
     case types.ZOOM:
       const scaledTranslate = getScaledTranslate(state, action.zoomFactor);
       const mousePositionOnScreen = { x: action.clientX, y: action.clientY };
@@ -41,7 +41,7 @@ export default function reducer(state, action) {
         translateX: scaledTranslate.x + zoomOffset.x,
         translateY: scaledTranslate.y + zoomOffset.y,
       };
-    
+
     default:
       return state;
   }
@@ -49,9 +49,10 @@ export default function reducer(state, action) {
 
 const getZoomOffset = (containerRect, mousePositionOnScreen, zoomFactor) => {
   const zoomOrigin = {
-    x: mousePositionOnScreen.x - containerRect.left,
-    y: mousePositionOnScreen.y - containerRect.top,
+    x: mousePositionOnScreen.x - containerRect.x,
+    y: mousePositionOnScreen.y - containerRect.y,
   };
+
   const currentDistanceToCenter = {
     x: containerRect.width / 2 - zoomOrigin.x,
     y: containerRect.height / 2 - zoomOrigin.y,

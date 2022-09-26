@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from "react";
-import usePanAndZoom from "./usePanAndZoom";
 // import "./PanAndZoomImage.css";
 
 export default function Canvas  ({ src }) {
