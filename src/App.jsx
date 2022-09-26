@@ -1,16 +1,18 @@
 import Bullseye from "./components/Bullseye";
 import Calibrate from "./components/Calibrate";
 import DataDisplay from "./components/DataDisplay";
-import PanAndZoomImage from "./components/PanAndZoomImage";
+import Canvas from "./components/Canvas";
 
 function App() {
   return (
-    <div className="App h-screen flex flex-row bg-gray-200">
-      <div className="w-60 flex flex-col">
+    <div className="App h-screen flex flex-row bg-gray-50 overflow-hidden">
+      <div className="w-60 flex flex-col shadow z-20">
         <DataDisplay />
       </div>
-      <PanAndZoomImage src="" />
-      <div className="w-60 flex flex-col">
+      <div className="flex-grow flex flex-col items-center justify-center">
+        <Canvas src="BPL220K 24ft.png"/>
+      </div>
+      <div className="w-60 flex flex-col shadow z-20">
         <Bullseye />
         <Calibrate />
       </div>

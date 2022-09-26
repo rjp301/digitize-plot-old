@@ -1,19 +1,17 @@
 import React from "react";
 import usePanAndZoom from "./usePanAndZoom";
-// import "./PanAndZoomImage.css";
 
-export default function PanAndZoomImage({ src }) {
+export default function PanZoom({ src }) {
   const { containerRef, onMouseDown, onWheel, translateX, translateY, scale } =
     usePanAndZoom();
   return (
     <div
-      className="Image-container flex-grow"
+      className="Image-container"
       ref={containerRef}
       onMouseDown={onMouseDown}
       onWheel={onWheel}
     >
       <div
-        className="bg-red-500"
         style={{
           transform: `translate(${translateX}px, ${translateY}px) scale(${scale})`,
         }}
