@@ -2,7 +2,12 @@ import { types } from "./actions";
 import { v1 } from "uuid";
 
 export const initialState = {
-  markers: [],
+  markers: [
+    { id: "y1", x: 50, y: 250, colour: "red", label: "Y1", permanent: true },
+    { id: "y2", x: 50, y: 50, colour: "red", label: "Y2", permanent: true },
+    { id: "x1", x: 100, y: 300, colour: "blue", label: "X1", permanent: true },
+    { id: "x2", x: 300, y: 300, colour: "blue", label: "X2", permanent: true },
+  ],
 };
 
 export default function reducer(state, action) {
@@ -16,8 +21,7 @@ export default function reducer(state, action) {
         markers: [
           ...state.markers.filter((i) => i.id !== action.markerId),
           {
-            id: action.markerId,
-            isDragging: false,
+            ...state.markers.find((i) => i.id === action.markerId),
             x: action.x,
             y: action.y,
           },
@@ -33,9 +37,14 @@ export default function reducer(state, action) {
             id: v1(),
             x: action.x,
             y: action.y,
-            isDragging: false,
           },
         ],
+      };
+
+    case types.REMOVE_MARKER:
+      return {
+        ...state,
+        markers: state.markers.filter((i) => i.id !== action.markerId),
       };
 
     default:

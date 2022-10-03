@@ -1,5 +1,5 @@
 import { useReducer, useRef } from "react";
-import { addMarker, endDrag, startDrag } from "./actions";
+import { addMarker, endDrag, removeMarker, startDrag } from "./actions";
 import reducer, { initialState } from "./reducers";
 
 export default function useMarkers() {
@@ -7,21 +7,23 @@ export default function useMarkers() {
   const containerRef = useRef(null);
 
   const onLeftClickCanvas = (event) => {
-    // event.preventDefault();
+    event.evt.preventDefault();
     dispatch(addMarker(event));
   };
 
   const onRightClickMarker = (event) => {
-    event.preventDefault();
-    console.log(event);
-    // dispatch(removeMarker(event));
+    event.evt.preventDefault();
+    event.evt.stopPropagation();
+    dispatch(removeMarker(event));
   };
 
   const onDragStartMarker = (event) => {
+    event.evt.preventDefault();
     dispatch(startDrag(event));
   };
 
   const onDragEndMarker = (event) => {
+    event.evt.preventDefault();
     dispatch(endDrag(event));
   };
 

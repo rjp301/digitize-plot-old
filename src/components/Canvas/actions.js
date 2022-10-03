@@ -2,6 +2,7 @@ export const types = {
   DRAG_START: "DRAG_START",
   DRAG_END: "DRAG_END",
   ADD_MARKER: "ADD_MARKER",
+  REMOVE_MARKER: "REMOVE_MARKER",
 };
 
 export const startDrag = (event) => ({
@@ -20,4 +21,9 @@ export const addMarker = (event) => ({
   type: types.ADD_MARKER,
   x: event.evt.layerX,
   y: event.evt.layerY,
-})
+});
+
+export const removeMarker = (event) => ({
+  type: types.REMOVE_MARKER,
+  markerId: event.target.parent.id(),
+});

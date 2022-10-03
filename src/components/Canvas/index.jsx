@@ -24,6 +24,7 @@ export default function Canvas(props) {
     <div
       ref={containerRef}
       className="flex-grow flex flex-col items-center justify-center"
+      onContextMenu={e => e.preventDefault()}
     >
       <Stage width={width} height={height} onClick={onLeftClickCanvas}>
         <Layer>
@@ -33,6 +34,9 @@ export default function Canvas(props) {
               marker={marker}
               onDragStart={onDragStartMarker}
               onDragEnd={onDragEndMarker}
+              onRightClick={onRightClickMarker}
+              showCoords
+              label="coords"
             />
           ))}
         </Layer>
