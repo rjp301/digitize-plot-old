@@ -1,5 +1,5 @@
 import { types } from "./actions";
-import {v1} from "uuid";
+import { v1 } from "uuid";
 
 export const initialState = {
   markers: [],
@@ -8,16 +8,7 @@ export const initialState = {
 export default function reducer(state, action) {
   switch (action.type) {
     case types.DRAG_START:
-      return {
-        ...state,
-        markers: [
-          ...state.markers.filter((i) => i.id !== action.markerId),
-          {
-            ...state.markers.find((i) => i.id === action.markerId),
-            isDragging: true,
-          },
-        ],
-      };
+      return state;
 
     case types.DRAG_END:
       return {
@@ -25,7 +16,7 @@ export default function reducer(state, action) {
         markers: [
           ...state.markers.filter((i) => i.id !== action.markerId),
           {
-            ...state.markers.find((i) => i.id === action.markerId),
+            id: action.markerId,
             isDragging: false,
             x: action.x,
             y: action.y,

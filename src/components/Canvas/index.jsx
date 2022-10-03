@@ -9,11 +9,11 @@ export default function Canvas(props) {
 
   const {
     markers,
-    onLeftClick,
-    onRightClick,
-    onDragStart,
-    onDragEnd,
     containerRef,
+    onLeftClickCanvas,
+    onRightClickMarker,
+    onDragStartMarker,
+    onDragEndMarker,
   } = useMarkers();
 
   useEffect(() => {
@@ -25,14 +25,14 @@ export default function Canvas(props) {
       ref={containerRef}
       className="flex-grow flex flex-col items-center justify-center"
     >
-      <Stage width={width} height={height} onClick={onLeftClick}>
+      <Stage width={width} height={height} onClick={onLeftClickCanvas}>
         <Layer>
           {markers.map((marker) => (
             <Marker
               key={marker.id}
               marker={marker}
-              onDragStart={onDragStart}
-              onDragEnd={onDragEnd}
+              onDragStart={onDragStartMarker}
+              onDragEnd={onDragEndMarker}
             />
           ))}
         </Layer>

@@ -6,14 +6,14 @@ export const types = {
 
 export const startDrag = (event) => ({
   type: types.DRAG_START,
-  markerId: "id",
+  markerId: event.target.id(),
 });
 
 export const endDrag = (event) => ({
   type: types.DRAG_END,
   x: event.target.x(),
   y: event.target.y(),
-  markerId: "id",
+  markerId: event.target.id(),
 });
 
 export const addMarker = (event) => ({

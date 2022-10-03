@@ -7,11 +7,18 @@ export default function Marker(props) {
 
   return (
     <Group
+      id={marker.id}
       x={marker.x}
       y={marker.y}
       draggable
-      onDragStart={onDragStart}
-      onDragEnd={onDragEnd}
+      onDragStart={(event) => {
+        onDragStart(event);
+        setIsDragging(true);
+      }}
+      onDragEnd={(event) => {
+        onDragEnd(event);
+        setIsDragging(false);
+      }}
     >
       <Text text={marker.id} y={-50} x={-10} align="center" />
       <Text text={"X: " + marker.x} y={-35} x={-10} align="center" />
