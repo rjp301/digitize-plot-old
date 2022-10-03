@@ -1,95 +1,42 @@
-import React, { useEffect, useRef, useState } from "react";
-// import "./PanAndZoomImage.css";
+import React from "react";
+import { useEffect } from "react";
+import { Stage, Layer } from "react-konva";
+import Marker from "./Marker";
+import useMarkers from "./useMarkers";
 
-export default function Canvas  ({ src }) {
-  const [isPanning, setPanning] = useState(false);
-  const [image, setImage] = useState();
-  const [position, setPosition] = useState({
-    oldX: 0,
-    oldY: 0,
-    x: 0,
-    y: 0,
-    z: 1,
-  });
-  
-  const containerRef = useRef();
+export default function Canvas(props) {
+  const { width, height } = props;
 
-  const onLoad = (e) => {
-    setImage({
-      width: e.target.naturalWidth,
-      height: e.target.naturalHeight,
-    });
-  };
-
-  const onMouseDown = (e) => {
-    e.preventDefault();
-    setPanning(true);
-    setPosition({
-      ...position,
-      oldX: e.clientX,
-      oldY: e.clientY
-    });
-  };
-
-  const onWheel = (e) => {
-    if (e.deltaY) {
-      const sign = Math.sign(e.deltaY) / 10;
-      const scale = 1 - sign;
-      const rect = containerRef.current.getBoundingClientRect();
-      setPosition({
-        ...position,
-        x: position.x * scale - (rect.width / 2 - e.clientX + rect.x) * sign,
-        y: position.y * scale - (image.height * rect.width / image.width / 2 - e.clientY + rect.y) * sign,
-        z: position.z * scale,
-      });
-    }
-  };
+  const {
+    markers,
+    onLeftClick,
+    onRightClick,
+    onDragStart,
+    onDragEnd,
+    containerRef,
+  } = useMarkers();
 
   useEffect(() => {
-    const mouseup = () => {
-      setPanning(false);
-    };
-
-    const mousemove = (event) => {
-      if (isPanning) {
-        setPosition({
-          ...position,
-          x: position.x + event.clientX - position.oldX,
-          y: position.y + event.clientY - position.oldY,
-          oldX: event.clientX,
-          oldY: event.clientY,
-        });
-      }
-    };
-
-    window.addEventListener('mouseup', mouseup);
-    window.addEventListener('mousemove', mousemove);
-
-    return () => {
-      window.removeEventListener('mouseup', mouseup);
-      window.removeEventListener('mousemove', mousemove);
-    };
-  });
+    console.log(markers);
+  }, [markers]);
 
   return (
     <div
-      className="PanAndZoomImage-container"
       ref={containerRef}
-      onMouseDown={onMouseDown}
-      onWheel={onWheel}
+      className="flex-grow flex flex-col items-center justify-center"
     >
-      <div
-        style={{
-          transform: `translate(${position.x}px, ${position.y}px) scale(${position.z})`,
-        }}
-      >
-        <img
-          className="PanAndZoomImage-image"
-          alt="panable-and-zoomable"
-          src={src}
-          onLoad={onLoad}
-        />
-      </div>
+      <Stage width={width} height={height} onClick={onLeftClick}>
+        <Layer>
+          {markers.map((marker) => (
+            <Marker
+              key={marker.id}
+              marker={marker}
+              onDragStart={onDragStart}
+              onDragEnd={onDragEnd}
+            />
+          ))}
+        </Layer>
+      </Stage>
     </div>
   );
-};
+}
