@@ -1,9 +1,11 @@
 import React from "react";
-import { updateValue } from "../actions/calibrateActions";
 import { CalibrationState } from "../reducers/calibrationReducer";
 
-export default function Calibrate(props: { state: CalibrationState; dispatch: any }) {
-  const { state, dispatch } = props;
+export default function Calibrate(props: {
+  state: CalibrationState;
+  onUpdateValue: any;
+}) {
+  const { state, onUpdateValue } = props;
 
   return (
     <div className="bg-white flex-grow p-4 flex flex-col gap-2">
@@ -20,7 +22,7 @@ export default function Calibrate(props: { state: CalibrationState; dispatch: an
               type="text"
               className="w-full rounded p-1"
               value={marker.value}
-              onChange={(event) => dispatch(updateValue(event, id))}
+              onChange={(event) => onUpdateValue(event, id)}
             />
           </label>
         );

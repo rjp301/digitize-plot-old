@@ -1,5 +1,5 @@
 import React from "react";
-import {  useReducer,} from "react";
+import { useReducer } from "react";
 
 import DataTable from "./components/DataTable";
 import Calibrate from "./components/Calibrate";
@@ -8,23 +8,24 @@ import Bullseye from "./components/Bullseye";
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 
 import MouseCoords from "./components/MouseCoords";
-import calibrationReducer, {
-  initialCalibrationState,
-} from "./reducers/calibrationReducer";
 import mouseReducer, { initialMouse } from "./reducers/mouseReducer";
 import markerReducer, { initialMarkers } from "./reducers/markerReducer";
 import getCoordsConverter from "./helpers/getCoordsConverter";
 import Marker from "./components/Marker";
+import useCalibration from "./hooks/useCalibration";
 
 function App() {
+  const {
+    calibrationState,
+    onCalibrationValueUpdate,
+    onCalibrationPositionUpdate,
+  } = useCalibration();
+
   const [markerState, markerDispatch] = useReducer(
     markerReducer,
     initialMarkers
   );
-  const [calibrationState, calibrationDispatch] = useReducer(
-    calibrationReducer,
-    initialCalibrationState
-  );
+
   const [mouseState, mouseDispatch] = useReducer(mouseReducer, initialMouse);
 
   const coordsConverter = getCoordsConverter(calibrationState);
@@ -39,8 +40,8 @@ function App() {
         <TransformWrapper centerOnInit>
           <TransformComponent wrapperStyle={{ height: "100vh", width: "100%" }}>
             <Stage
-              width={320}
-              height={280}
+              width={400}
+              height={400}
               // onClick={onLeftClickCanvas}
               onContextMenu={(e) => {
                 e.evt.stopImmediatePropagation();
@@ -49,6 +50,22 @@ function App() {
               }}
               className="bg-white"
             >
+
+              <Layer>
+                {Object.keys(calibrationState).map((id) => {
+                  const marker = (calibrationState as any)[id];
+                  return (
+                    <Marker
+                      key={id}
+                      marker={marker}
+                      onDragEnd={onCalibrationPositionUpdate}
+                      showCoords
+                      label={marker.label}
+                    />
+                  );
+                })}
+              </Layer>
+
               <Layer>
                 {markerState.map((marker) => (
                   <Marker
@@ -70,7 +87,10 @@ function App() {
       <div className="w-60 flex flex-col shadow z-20">
         <Bullseye />
         <MouseCoords coords={mouseState} />
-        <Calibrate state={calibrationState} dispatch={calibrationDispatch} />
+        <Calibrate
+          state={calibrationState}
+          onUpdateValue={onCalibrationValueUpdate}
+        />
       </div>
     </div>
   );
