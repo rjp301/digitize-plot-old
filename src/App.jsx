@@ -6,21 +6,6 @@ import Canvas from "./components/Canvas.jsx";
 export const StateContext = createContext();
 
 function App() {
-  const [state, setState] = useState({
-    x1: { x: 1, y: 0, v: 0 },
-    x2: { x: 9, y: 0, v: 0 },
-    y1: { x: 0, y: 1, v: 0 },
-    y2: { x: 0, y: 9, v: 0 },
-
-    mouseX: 0,
-    mouseY: 0,
-    data: [],
-  });
-
-  const [mouse, setMouse] = useState({ x: 0, y: 0 });
-  const [data, setData] = useState([]);
-
-  const imgRef = useRef();
 
   return (
     <div className="App h-screen flex flex-row bg-gray-50 overflow-hidden">
@@ -33,11 +18,6 @@ function App() {
         {/* Bullseye */}
         <div
           className="aspect-square bg-blue-500 relative"
-          style={{
-            backgroundImage: `url(${imgRef.src})`,
-            backgroundRepeat: "no-repeat",
-            backgroundSize: `${imgRef.width}px ${imgRef.height}px`,
-          }}
         >
           <div className="absolute top-1/2 -translate-y-1/2 h-px w-full bg-gray-500 opacity-50" />
           <div className="absolute left-1/2 -translate-x-1/2 w-px h-full bg-gray-500 opacity-50" />
