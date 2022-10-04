@@ -51,6 +51,7 @@ function App() {
               const marker = (calibrationState as any)[id];
               return (
                 <Marker
+                  id={id}
                   key={id}
                   marker={marker}
                   onDragEnd={onCalibrationPositionUpdate}

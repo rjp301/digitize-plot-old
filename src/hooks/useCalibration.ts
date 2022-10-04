@@ -20,6 +20,7 @@ export default function useCalibration() {
     onCalibrationPositionUpdate: (event: any) => {
       dispatch(updatePosition(event));
       event.cancelBubble = true;
+      console.log(calibrationState);
     },
   };
 }

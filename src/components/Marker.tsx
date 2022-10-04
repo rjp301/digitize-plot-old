@@ -4,11 +4,11 @@ import { Circle, Group, Text } from "react-konva";
 
 export default function Marker(props: any) {
   const [isDragging, setIsDragging] = useState(false);
-  const { marker, onDragEnd, onRightClick, showCoords } = props;
+  const { marker, onDragEnd, onRightClick, showCoords, id } = props;
 
   return (
     <Group
-      id={marker.id}
+      id={marker.id || id}
       x={marker.x}
       y={marker.y}
       draggable
