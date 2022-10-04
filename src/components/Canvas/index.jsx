@@ -2,7 +2,6 @@ import React from "react";
 import { useEffect } from "react";
 import { Stage, Layer, Image } from "react-konva";
 import Marker from "./Marker";
-import OldPanZoom from "./OldPanZoom";
 import useMarkers from "./useMarkers";
 
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
@@ -12,7 +11,6 @@ export default function Canvas(props) {
 
   const {
     markers,
-    containerRef,
     onLeftClickCanvas,
     onRightClickMarker,
     onDragStartMarker,
@@ -30,6 +28,11 @@ export default function Canvas(props) {
           width={width}
           height={height}
           onClick={onLeftClickCanvas}
+          onContextMenu={e => {
+            e.evt.stopImmediatePropagation()
+            e.evt.stopPropagation()
+            e.evt.preventDefault()
+          }}
           className="bg-white"
         >
           <Layer>
