@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
 // import "./PanAndZoomImage.css";
 
-export default function  OldPanZoom ({ src }) {
+export default function OldPanZoom(props) {
   const [isPanning, setPanning] = useState(false);
-  const [image, setImage] = useState();
+  const [image, setImage] = useState({ width: 300, height: 300 });
   const [position, setPosition] = useState({
     oldX: 0,
     oldY: 0,
@@ -11,7 +11,7 @@ export default function  OldPanZoom ({ src }) {
     y: 0,
     z: 1,
   });
-  
+
   const containerRef = useRef();
 
   const onLoad = (e) => {
@@ -27,7 +27,7 @@ export default function  OldPanZoom ({ src }) {
     setPosition({
       ...position,
       oldX: e.clientX,
-      oldY: e.clientY
+      oldY: e.clientY,
     });
   };
 
@@ -39,7 +39,10 @@ export default function  OldPanZoom ({ src }) {
       setPosition({
         ...position,
         x: position.x * scale - (rect.width / 2 - e.clientX + rect.x) * sign,
-        y: position.y * scale - (image.height * rect.width / image.width / 2 - e.clientY + rect.y) * sign,
+        y:
+          position.y * scale -
+          ((image.height * rect.width) / image.width / 2 - e.clientY + rect.y) *
+            sign,
         z: position.z * scale,
       });
     }
@@ -62,12 +65,12 @@ export default function  OldPanZoom ({ src }) {
       }
     };
 
-    window.addEventListener('mouseup', mouseup);
-    window.addEventListener('mousemove', mousemove);
+    window.addEventListener("mouseup", mouseup);
+    window.addEventListener("mousemove", mousemove);
 
     return () => {
-      window.removeEventListener('mouseup', mouseup);
-      window.removeEventListener('mousemove', mousemove);
+      window.removeEventListener("mouseup", mouseup);
+      window.removeEventListener("mousemove", mousemove);
     };
   });
 
@@ -83,13 +86,8 @@ export default function  OldPanZoom ({ src }) {
           transform: `translate(${position.x}px, ${position.y}px) scale(${position.z})`,
         }}
       >
-        <img
-          className="PanAndZoomImage-image"
-          alt="panable-and-zoomable"
-          src={src}
-          onLoad={onLoad}
-        />
+        {props.children}
       </div>
     </div>
   );
-};
+}

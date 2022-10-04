@@ -23,37 +23,37 @@ function App() {
   const imgRef = useRef();
 
   return (
-    <Canvas width={window.innerWidth} height={window.innerHeight} />
-    // <div className="App h-screen flex flex-row bg-gray-50 overflow-hidden">
-    //   <div className="w-60 flex flex-col shadow z-20 bg-white p-4">
-    //     <DataTable data={data} />
-    //   </div>
+    <div className="App h-screen flex flex-row bg-gray-50 overflow-hidden">
+      <div className="w-60 flex flex-col shadow z-20 bg-white p-4">
+        <DataTable data={data} />
+      </div>
 
-    //   <div className="w-60 flex flex-col shadow z-20">
-    //     {/* Bullseye */}
-    //     <div
-    //       className="aspect-square bg-blue-500 relative"
-    //       style={{
-    //         backgroundImage: `url(${imgRef.src})`,
-    //         backgroundRepeat: "no-repeat",
-    //         backgroundSize: `${imgRef.width}px ${imgRef.height}px`,
-    //       }}
-    //     >
-    //       <div className="absolute top-1/2 -translate-y-1/2 h-px w-full bg-gray-500 opacity-50" />
-    //       <div className="absolute left-1/2 -translate-x-1/2 w-px h-full bg-gray-500 opacity-50" />
-    //       <div className="absolute left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 bg-gray-700 h-1 w-1 rounded-full" />
-    //     </div>
+      <Canvas width={300} height={300} />
+      <div className="w-60 flex flex-col shadow z-20">
+        {/* Bullseye */}
+        <div
+          className="aspect-square bg-blue-500 relative"
+          style={{
+            backgroundImage: `url(${imgRef.src})`,
+            backgroundRepeat: "no-repeat",
+            backgroundSize: `${imgRef.width}px ${imgRef.height}px`,
+          }}
+        >
+          <div className="absolute top-1/2 -translate-y-1/2 h-px w-full bg-gray-500 opacity-50" />
+          <div className="absolute left-1/2 -translate-x-1/2 w-px h-full bg-gray-500 opacity-50" />
+          <div className="absolute left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 bg-gray-700 h-1 w-1 rounded-full" />
+        </div>
 
-    //     {/* Mouse coordinates */}
-    //     <div className="p-4 bg-white">
-    //       <div>{mouse.x}</div>
-    //       <div>{mouse.y}</div>
-    //     </div>
+        {/* Mouse coordinates */}
+        <div className="p-4 bg-white">
+          <div>{mouse.x}</div>
+          <div>{mouse.y}</div>
+        </div>
 
-    //     {/* Calibrations */}
-    //     <Calibrate />
-    //   </div>
-    // </div>
+        {/* Calibrations */}
+        <Calibrate />
+      </div>
+    </div>
   );
 }
 
