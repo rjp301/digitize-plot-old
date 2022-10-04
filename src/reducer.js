@@ -2,6 +2,12 @@ import { types } from "./actions";
 import { v1 } from "uuid";
 
 export const initialState = {
+  calibrations: {
+    x1: 0,
+    x2: 0,
+    y1: 0,
+    y2: 0,
+  },
   markers: [
     { id: "y1", x: 50, y: 250, colour: "red", label: "Y1", permanent: true },
     { id: "y2", x: 50, y: 50, colour: "red", label: "Y2", permanent: true },

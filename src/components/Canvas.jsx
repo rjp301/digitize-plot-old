@@ -1,8 +1,8 @@
 import React from "react";
 import { useEffect } from "react";
-import { Stage, Layer, Image } from "react-konva";
+import { Stage, Layer} from "react-konva";
 import Marker from "./Marker";
-import useMarkers from "./useMarkers";
+import useMarkers from "../useData";
 
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 

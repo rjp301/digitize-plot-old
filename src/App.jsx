@@ -1,7 +1,7 @@
 import Calibrate from "./components/Calibrate";
 import { createContext, useRef, useState } from "react";
 import DataTable from "./components/DataTable";
-import Canvas from "./components/Canvas/index.jsx";
+import Canvas from "./components/Canvas.jsx";
 
 export const StateContext = createContext();
 
