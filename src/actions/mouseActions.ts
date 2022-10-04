@@ -1,9 +1,7 @@
-import { SyntheticEvent } from "react";
-
-export interface Action {
+export interface mouseAction {
   type: string;
-  x?: number;
-  y?: number;
+  x: number;
+  y: number;
 }
 
 export const types = {
@@ -12,16 +10,8 @@ export const types = {
   MOUSE_MOVE: "MOUSE_MOVE",
 };
 
-export const mouseEnter = (event: any): Action => ({
-  type: types.MOUSE_ENTER,
-});
-
-export const mouseLeave = (event: any): Action => ({
-  type: types.MOUSE_LEAVE,
-});
-
-export const mouseMove = (event: any): Action => ({
+export const mouseMove = (event: any): mouseAction => ({
   type: types.MOUSE_MOVE,
-  x: event.target,
+  x: event.target.x,
   y: event.target.y,
 });

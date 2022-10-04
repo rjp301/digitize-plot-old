@@ -1,46 +1,35 @@
-import { SyntheticEvent } from "react";
+import { v1 } from "uuid";
 
-export interface Action {
+export interface MarkerAction {
   type: string;
-  x?: number;
-  y?: number;
-  markerId?: string;
-}
-
-interface Event {
-  target: {
-    x: () => number;
-    y: () => number;
-    id: () => string;
-  };
+  id: string;
+  x: number;
+  y: number;
 }
 
 export const types = {
-  DRAG_START: "DRAG_START",
-  DRAG_END: "DRAG_END",
+  UPDATE_POSITION: "UPDATE_POSITION",
   ADD_MARKER: "ADD_MARKER",
   REMOVE_MARKER: "REMOVE_MARKER",
 };
 
-export const startDrag = (event: any): Action => ({
-  type: types.DRAG_START,
-  markerId: event.target.id(),
-});
-
-export const endDrag = (event: any): Action => ({
-  type: types.DRAG_END,
+export const updatePosition = (event: any): MarkerAction => ({
+  type: types.UPDATE_POSITION,
+  id: event.target.id(),
   x: event.target.x(),
   y: event.target.y(),
-  markerId: event.target.id(),
 });
 
-export const addMarker = (event: any): Action => ({
+export const addMarker = (event: any): MarkerAction => ({
   type: types.ADD_MARKER,
+  id: v1(),
   x: event.evt.layerX,
   y: event.evt.layerY,
 });
 
-export const removeMarker = (event: any): Action => ({
+export const removeMarker = (event: any): MarkerAction => ({
   type: types.REMOVE_MARKER,
-  markerId: event.target.parent.id(),
+  id: event.target.parent.id(),
+  x: 0,
+  y: 0,
 });

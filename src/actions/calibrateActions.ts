@@ -20,4 +20,9 @@ export const updateValue = (
   id,
 });
 
-export const updatePosition = (event: any, id: string) => {};
+export const updatePosition = (event: any): CalibrationAction => ({
+  type: types.UPDATE_POSITION,
+  id: event.target.id(),
+  x: event.target.x(),
+  y: event.target.y(),
+});
