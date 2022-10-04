@@ -5,8 +5,6 @@ export interface mouseAction {
 }
 
 export const types = {
-  MOUSE_ENTER: "MOUSE_ENTER",
-  MOUSE_LEAVE: "MOUSE_LEAVE",
   MOUSE_MOVE: "MOUSE_MOVE",
 };
 

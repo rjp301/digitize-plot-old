@@ -9,7 +9,6 @@ export default function useMouse() {
     mouseState,
     onMouseMoveOverCanvas: (event: any) => {
       event.evt.preventDefault();
-      console.log(event);
       dispatch(mouseMove(event));
     },
   };

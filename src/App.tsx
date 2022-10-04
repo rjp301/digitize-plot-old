@@ -8,12 +8,11 @@ import Bullseye from "./components/Bullseye";
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 
 import MouseCoords from "./components/MouseCoords";
-import mouseReducer, { initialMouse } from "./reducers/mouseReducer";
-import markerReducer, { initialMarkers } from "./reducers/markerReducer";
 import getCoordsConverter from "./helpers/getCoordsConverter";
 import Marker from "./components/Marker";
 import useCalibration from "./hooks/useCalibration";
 import useMouse from "./hooks/useMouse";
+import useMarkers from "./hooks/useMarkers";
 
 function App() {
   const {
@@ -24,10 +23,7 @@ function App() {
 
   const { mouseState, onMouseMoveOverCanvas } = useMouse();
 
-  const [markerState, markerDispatch] = useReducer(
-    markerReducer,
-    initialMarkers
-  );
+  const { markerState } = useMarkers();
 
   const coordsConverter = getCoordsConverter(calibrationState);
 
