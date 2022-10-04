@@ -1,6 +1,7 @@
 import { useReducer, useRef } from "react";
-import { addMarker, endDrag, removeMarker, startDrag } from "./actions";
-import reducer, { initialState } from "./reducer";
+import { addMarker, endDrag, removeMarker, startDrag } from "../actions/markerActions";
+import { initialState } from "../reducers/initialState";
+import reducer from "../reducers/markerReducer";
 
 export default function useMarkers() {
   const [state, dispatch] = useReducer(reducer, initialState);

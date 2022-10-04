@@ -1,4 +1,4 @@
-import { State, XY } from "../reducer";
+import { State, XY } from "../reducers/markerReducer";
 
 interface LinearInterpValues {
   x: number;

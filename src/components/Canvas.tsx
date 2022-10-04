@@ -1,12 +1,12 @@
 import React from "react";
 import { useEffect } from "react";
-import { Stage, Layer} from "react-konva";
+import { Stage, Layer } from "react-konva";
 import Marker from "./Marker";
-import useMarkers from "../useData";
+import useMarkers from "../hooks/useMarkers";
 
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 
-export default function Canvas(props) {
+export default function Canvas(props: { width: number; height: number }) {
   const { width, height } = props;
 
   const {
@@ -23,15 +23,18 @@ export default function Canvas(props) {
 
   return (
     <TransformWrapper centerOnInit>
-      <TransformComponent wrapperClass="flex-grow" wrapperStyle={{height: "100vh"}}>
+      <TransformComponent
+        wrapperClass="flex-grow"
+        wrapperStyle={{ height: "100vh" }}
+      >
         <Stage
           width={width}
           height={height}
           onClick={onLeftClickCanvas}
-          onContextMenu={e => {
-            e.evt.stopImmediatePropagation()
-            e.evt.stopPropagation()
-            e.evt.preventDefault()
+          onContextMenu={(e) => {
+            e.evt.stopImmediatePropagation();
+            e.evt.stopPropagation();
+            e.evt.preventDefault();
           }}
           className="bg-white"
         >

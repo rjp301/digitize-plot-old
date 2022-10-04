@@ -1,4 +1,7 @@
-export default function DataTable(props) {
+import React from "react";
+import { XY } from "../reducers/initialState";
+
+export default function DataTable(props: { data: XY[] }) {
   const { data } = props;
 
   return (
