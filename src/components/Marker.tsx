@@ -1,7 +1,8 @@
+import React from "react";
 import { useState } from "react";
 import { Circle, Group, Text } from "react-konva";
 
-export default function Marker(props) {
+export default function Marker(props: any) {
   const [isDragging, setIsDragging] = useState(false);
   const { marker, onDragStart, onDragEnd, onRightClick, showCoords } = props;
 

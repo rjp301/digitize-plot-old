@@ -1,18 +1,23 @@
-export interface Action {
+export interface CalibrationAction {
   type: string;
   id: string;
-  value: string;
+  value?: string;
+  x?: number;
+  y?: number;
 }
 
 export const types = {
-  UPDATE: "UPDATE",
+  UPDATE_VALUE: "UPDATE_VALUE",
+  UPDATE_POSITION: "UPDATE_POSITION",
 };
 
 export const updateValue = (
   event: { target: HTMLInputElement },
   id: string
-): Action => ({
-  type: types.UPDATE,
+): CalibrationAction => ({
+  type: types.UPDATE_VALUE,
   value: event.target.value,
   id,
 });
+
+export const updatePosition = (event: any, id: string) => {};

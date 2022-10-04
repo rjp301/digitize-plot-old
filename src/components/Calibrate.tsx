@@ -1,16 +1,14 @@
 import React from "react";
 import { updateValue } from "../actions/calibrateActions";
-import { State } from "../reducers/initialState";
+import { CalibrationState } from "../reducers/calibrationReducer";
 
-const calibrations = ["x1", "x2", "y1", "y2"];
-
-export default function Calibrate(props: { state: State; dispatch: any }) {
+export default function Calibrate(props: { state: CalibrationState; dispatch: any }) {
   const { state, dispatch } = props;
 
   return (
     <div className="bg-white flex-grow p-4 flex flex-col gap-2">
-      {calibrations.map((id) => {
-        const marker = state.markers.find((i) => i.id === "x1");
+      {Object.keys(state).map((id: string) => {
+        const marker = (state as any)[id];
         return (
           <label
             htmlFor={id}
@@ -21,7 +19,7 @@ export default function Calibrate(props: { state: State; dispatch: any }) {
               id={id}
               type="text"
               className="w-full rounded p-1"
-              value={marker?.value}
+              value={marker.value}
               onChange={(event) => dispatch(updateValue(event, id))}
             />
           </label>

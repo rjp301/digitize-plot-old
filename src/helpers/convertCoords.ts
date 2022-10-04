@@ -1,4 +1,4 @@
-import { State, XY } from "../reducers/markerReducer";
+import { State, XY } from "../reducers/initialState";
 
 interface LinearInterpValues {
   x: number;
@@ -14,22 +14,25 @@ function linearInterp(values: LinearInterpValues): number {
 }
 
 export default function convertCoords(coords: XY, state: State): XY {
-  const cal = state.calibrations;
+  const markerX1 = state.calibrations.x1;
+  const markerX2 = state.calibrations.x2;
+  const markerY1 = state.calibrations.y1;
+  const markerY2 = state.calibrations.y2;
 
   const xValues = {
     x: coords.x,
-    x0: cal.x1.value,
-    x1: cal.x2.value,
-    y0: cal.x1.x,
-    y1: cal.x2.x,
+    x0: markerX1.value,
+    x1: markerX2.value,
+    y0: markerX1.x,
+    y1: markerX2.x,
   };
 
   const yValues = {
     x: coords.y,
-    x0: cal.y1.value,
-    x1: cal.y2.value,
-    y0: cal.y1.y,
-    y1: cal.y2.y,
+    x0: markerY1.value,
+    x1: markerY2.value,
+    y0: markerY1.y,
+    y1: markerY2.y,
   };
 
   return {

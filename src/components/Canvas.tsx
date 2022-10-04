@@ -23,10 +23,7 @@ export default function Canvas(props: { width: number; height: number }) {
 
   return (
     <TransformWrapper centerOnInit>
-      <TransformComponent
-        wrapperClass="flex-grow"
-        wrapperStyle={{ height: "100vh" }}
-      >
+      <TransformComponent wrapperStyle={{ height: "100vh", width: "100%" }}>
         <Stage
           width={width}
           height={height}

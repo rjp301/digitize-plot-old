@@ -9,9 +9,16 @@ import Bullseye from "./components/Bullseye";
 import { initialState } from "./reducers/initialState";
 import reducer from "./reducers/markerReducer";
 import MouseCoords from "./components/MouseCoords";
+import calibrationReducer, {
+  initialCalibrationState,
+} from "./reducers/calibrationReducer";
 
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
+  const [calibrationState, calibrationDispatch] = useReducer(
+    calibrationReducer,
+    initialCalibrationState
+  );
 
   return (
     <div className="App h-screen flex flex-row bg-gray-50 overflow-hidden">
@@ -26,7 +33,7 @@ function App() {
       <div className="w-60 flex flex-col shadow z-20">
         <Bullseye />
         <MouseCoords coords={state.mouse} />
-        <Calibrate state={state} dispatch={dispatch} />
+        <Calibrate state={calibrationState} dispatch={calibrationDispatch} />
       </div>
     </div>
   );
