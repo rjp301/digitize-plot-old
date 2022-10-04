@@ -12,6 +12,6 @@ export const types = {
 
 export const mouseMove = (event: any): mouseAction => ({
   type: types.MOUSE_MOVE,
-  x: event.target.x,
-  y: event.target.y,
+  x: event.evt.offsetX,
+  y: event.evt.offsetY,
 });

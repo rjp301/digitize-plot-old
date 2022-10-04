@@ -13,6 +13,7 @@ import markerReducer, { initialMarkers } from "./reducers/markerReducer";
 import getCoordsConverter from "./helpers/getCoordsConverter";
 import Marker from "./components/Marker";
 import useCalibration from "./hooks/useCalibration";
+import useMouse from "./hooks/useMouse";
 
 function App() {
   const {
@@ -21,12 +22,12 @@ function App() {
     onCalibrationPositionUpdate,
   } = useCalibration();
 
+  const { mouseState, onMouseMoveOverCanvas } = useMouse();
+
   const [markerState, markerDispatch] = useReducer(
     markerReducer,
     initialMarkers
   );
-
-  const [mouseState, mouseDispatch] = useReducer(mouseReducer, initialMouse);
 
   const coordsConverter = getCoordsConverter(calibrationState);
 
@@ -43,6 +44,7 @@ function App() {
               width={400}
               height={400}
               // onClick={onLeftClickCanvas}
+              onMouseMove={onMouseMoveOverCanvas}
               onContextMenu={(e) => {
                 e.evt.stopImmediatePropagation();
                 e.evt.stopPropagation();
@@ -50,7 +52,6 @@ function App() {
               }}
               className="bg-white"
             >
-
               <Layer>
                 {Object.keys(calibrationState).map((id) => {
                   const marker = (calibrationState as any)[id];
