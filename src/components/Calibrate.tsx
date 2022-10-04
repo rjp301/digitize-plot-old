@@ -13,6 +13,7 @@ export default function Calibrate(props: {
         const marker = (state as any)[id];
         return (
           <label
+            key={id}
             htmlFor={id}
             className="flex gap-2 border-b-2 pb-1 items-center"
           >

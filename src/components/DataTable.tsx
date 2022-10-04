@@ -11,13 +11,15 @@ export default function DataTable(props: {
     <table>
       <thead>
         <tr>
+          <th>I</th>
           <th>X</th>
           <th>Y</th>
         </tr>
       </thead>
-      <tbody>
-        {data.map(coordsConverter).map((row) => (
-          <tr>
+      <tbody className="text-sm">
+        {data.map((row, index) => (
+          <tr key={index}>
+            <td>{row.id.substring(10,5)}</td>
             <td>{row.x}</td>
             <td>{row.y}</td>
           </tr>

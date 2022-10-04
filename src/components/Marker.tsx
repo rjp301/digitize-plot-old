@@ -28,7 +28,14 @@ export default function Marker(props: any) {
         </>
       )}
       <Circle
-        onContextMenu={marker.permanent ? null : onRightClick}
+        onClick={(event) => {
+          if (event.evt.button === 2 && onRightClick) {
+            onRightClick(event);
+            return;
+          }
+          event.evt.preventDefault();
+          event.cancelBubble = true;
+        }}
         stroke={isDragging ? "gray" : marker.colour ? marker.colour : "black"}
         radius={5}
         fill="lightgray"

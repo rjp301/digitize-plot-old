@@ -1,4 +1,4 @@
-import { useReducer} from "react";
+import { useReducer } from "react";
 import {
   addMarker,
   updatePosition,
@@ -12,13 +12,16 @@ export default function useMarkers() {
   return {
     markerState,
     onLeftClickCanvas: (event: any) => {
-      event.evt.preventDefault();
-      dispatch(addMarker(event));
+      if (event.evt.button === 0) {
+        dispatch(addMarker(event));
+        return;
+      }
+      event.cancelBubble = true;
     },
-    
+
     onRightClickMarker: (event: any) => {
-      event.evt.preventDefault();
       dispatch(removeMarker(event));
+      event.cancelBubble = true;
     },
 
     onDragEndMarker: (event: any) => {

@@ -16,9 +16,10 @@ export default function useCalibration() {
       event.preventDefault();
       dispatch(updateValue(event, id));
     },
+
     onCalibrationPositionUpdate: (event: any) => {
-      event.preventDefault();
       dispatch(updatePosition(event));
+      event.cancelBubble = true;
     },
   };
 }
