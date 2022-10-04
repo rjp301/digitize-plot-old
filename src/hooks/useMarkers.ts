@@ -1,40 +1,34 @@
 import { useReducer, useRef } from "react";
-import { addMarker, endDrag, removeMarker, startDrag } from "../actions/markerActions";
-import reducer from "../reducers/markerReducer";
+import {
+  addMarker,
+  updatePosition,
+  removeMarker,
+} from "../actions/markerActions";
+import markerReducer from "../reducers/markerReducer";
+import { initialMarkers } from "../reducers/markerReducer";
 
 export default function useMarkers() {
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const [state, dispatch] = useReducer(markerReducer, initialMarkers);
   const containerRef = useRef(null);
 
-  const onLeftClickCanvas = (event) => {
+  const onLeftClickCanvas = (event: any) => {
     event.evt.preventDefault();
     dispatch(addMarker(event));
   };
 
-  const onRightClickMarker = (event) => {
+  const onRightClickMarker = (event: any) => {
     event.evt.preventDefault();
-    event.evt.stopPropagation();
     dispatch(removeMarker(event));
   };
 
-  const onDragStartMarker = (event) => {
+  const onDragEndMarker = (event: any) => {
     event.evt.preventDefault();
-    event.evt.stopPropagation();
-    dispatch(startDrag(event));
-  };
-
-  const onDragEndMarker = (event) => {
-    event.evt.preventDefault();
-    event.evt.stopPropagation();
-    dispatch(endDrag(event));
+    dispatch(updatePosition(event));
   };
 
   return {
-    ...state,
-    containerRef,
     onLeftClickCanvas,
     onRightClickMarker,
-    onDragStartMarker,
     onDragEndMarker,
   };
 }

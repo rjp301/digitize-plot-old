@@ -1,5 +1,5 @@
 import React from "react";
-import { XY } from "../reducers/initialState";
+import { XY } from "../helpers/types";
 
 export default function MouseCoords(props: { coords: XY }) {
   const { coords } = props;

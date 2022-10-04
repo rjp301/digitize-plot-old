@@ -1,8 +1,11 @@
 import React from "react";
-import { XY } from "../reducers/initialState";
+import { XY } from "../helpers/types";
 
-export default function DataTable(props: { data: XY[] }) {
-  const { data } = props;
+export default function DataTable(props: {
+  data: XY[];
+  coordsConverter: (coords: XY) => XY;
+}) {
+  const { data, coordsConverter } = props;
 
   return (
     <table>
@@ -13,7 +16,7 @@ export default function DataTable(props: { data: XY[] }) {
         </tr>
       </thead>
       <tbody>
-        {data.map((row) => (
+        {data.map(coordsConverter).map((row) => (
           <tr>
             <td>{row.x}</td>
             <td>{row.y}</td>
