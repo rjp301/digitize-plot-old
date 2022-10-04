@@ -19,11 +19,13 @@ export default function useMarkers() {
 
   const onDragStartMarker = (event) => {
     event.evt.preventDefault();
+    event.evt.stopPropagation();
     dispatch(startDrag(event));
   };
 
   const onDragEndMarker = (event) => {
     event.evt.preventDefault();
+    event.evt.stopPropagation();
     dispatch(endDrag(event));
   };
 

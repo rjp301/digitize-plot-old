@@ -5,6 +5,8 @@ import Marker from "./Marker";
 import OldPanZoom from "./OldPanZoom";
 import useMarkers from "./useMarkers";
 
+import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
+
 export default function Canvas(props) {
   const { width, height } = props;
 
@@ -22,14 +24,14 @@ export default function Canvas(props) {
   }, [markers]);
 
   return (
-    <div
-      ref={containerRef}
-      className="flex-grow flex flex-col items-center justify-center"
-      onContextMenu={(e) => e.preventDefault()}
-    >
-      <OldPanZoom>
-        <Stage width={width} height={height} onClick={onLeftClickCanvas} className="bg-white">
-          {/* <Image /> */}
+    <TransformWrapper centerOnInit>
+      <TransformComponent wrapperClass="flex-grow" wrapperStyle={{height: "100vh"}}>
+        <Stage
+          width={width}
+          height={height}
+          onClick={onLeftClickCanvas}
+          className="bg-white"
+        >
           <Layer>
             {markers.map((marker) => (
               <Marker
@@ -44,7 +46,7 @@ export default function Canvas(props) {
             ))}
           </Layer>
         </Stage>
-      </OldPanZoom>
-    </div>
+      </TransformComponent>
+    </TransformWrapper>
   );
 }
