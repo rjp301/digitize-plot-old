@@ -2,7 +2,11 @@ import React, { Dispatch, useCallback } from "react";
 import { useDropzone } from "react-dropzone";
 import ImageType from "../types/Image";
 
-export default function Dropzone({ setImage }: { setImage: Dispatch<ImageType> }) {
+export default function Dropzone({
+  setImage,
+}: {
+  setImage: Dispatch<ImageType>;
+}) {
   const onDrop = useCallback(
     (acceptedFiles: File[]) => {
       const img = new Image();

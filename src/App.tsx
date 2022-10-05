@@ -97,7 +97,7 @@ export default function App() {
       </div>
 
       <div className="w-80 flex flex-col shadow z-20">
-        <Bullseye stageRef={stageRef} />
+        <Bullseye stageRef={stageRef} mouseState={mouseState} image={image} />
         <MouseCoords coords={mouseState} />
         <Calibrate
           state={calibrationState}
