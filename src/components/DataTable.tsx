@@ -1,5 +1,5 @@
 import React from "react";
-import { XY } from "../helpers/types";
+import XY from "../types/XY";
 
 export default function DataTable(props: {
   data: XY[];

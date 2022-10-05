@@ -1,34 +1,39 @@
-import React, { Dispatch, useCallback, useEffect } from "react";
+import React, { Dispatch, useCallback } from "react";
 import { useDropzone } from "react-dropzone";
+import ImageType from "../types/Image";
 
-export default function Dropzone({
-  files,
-  setFiles,
-}: {
-  files: File[];
-  setFiles: Dispatch<File[]>;
-}) {
+export default function Dropzone({ setImage }: { setImage: Dispatch<ImageType> }) {
   const onDrop = useCallback(
     (acceptedFiles: File[]) => {
-      setFiles(acceptedFiles);
+      const img = new Image();
+      const url = URL.createObjectURL(acceptedFiles[0]);
+
+      img.src = url;
+      img.onload = () => {
+        setImage({
+          height: img.height,
+          width: img.width,
+          src: url,
+        });
+      };
+      img.onerror = (err) => {
+        console.log("img error");
+        console.error(err);
+      };
     },
-    [setFiles]
+    [setImage]
   );
 
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
-
-  useEffect(() => {
-    // files.forEach((file) => URL.revokeObjectURL(file.preview));
-    console.log("files", files);
-  }, [files]);
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    accept: { "image/*": [] },
+    onDrop,
+  });
 
   return (
     <div {...getRootProps()}>
       <input {...getInputProps()} />
       {isDragActive ? (
         <p>Drop the files here ...</p>
-      ) : files.length > 0 ? (
-        files.map((file) => <img src={URL.createObjectURL(file)} alt="img" />)
       ) : (
         <p>Drag 'n' drop some files here, or click to select files</p>
       )}

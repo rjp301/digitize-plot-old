@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import DataTable from "./components/DataTable";
 import Calibrate from "./components/Calibrate";
@@ -14,7 +14,25 @@ import useMouse from "./hooks/useMouse";
 import useMarkers from "./hooks/useMarkers";
 import Dropzone from "./components/Dropzone";
 
-function App() {
+import Image from "./types/Image";
+
+const loadImage = (setImageDimensions: any, imageUrl: string) => {
+  const img = new Image();
+  img.src = imageUrl;
+
+  img.onload = () => {
+    setImageDimensions({
+      height: img.height,
+      width: img.width,
+    });
+  };
+  img.onerror = (err) => {
+    console.log("img error");
+    console.error(err);
+  };
+};
+
+export default function App() {
   const {
     calibrationState,
     onCalibrationValueUpdate,
@@ -28,9 +46,17 @@ function App() {
     onDragEndMarker,
   } = useMarkers();
 
-  const [files, setFiles] = useState<File[]>([]);
+  const [image, setImage] = useState<Image>({
+    width: 300,
+    height: 300,
+    src: "",
+  });
   const coordsConverter = getCoordsConverter(calibrationState);
   const stageRef = useRef(null);
+
+  useEffect(() => {
+    console.log(image);
+  }, [image]);
 
   return (
     <div className="App h-screen flex flex-row overflow-hidden">
@@ -39,8 +65,8 @@ function App() {
       </div>
 
       <div className="flex-grow h-screen w-full flex items-center justify-center bg-gray-50 ">
-        {true ? (
-          <Dropzone files={files} setFiles={setFiles} />
+        {!image.src ? (
+          <Dropzone setImage={setImage} />
         ) : (
           <Stage
             ref={stageRef}
@@ -91,5 +117,3 @@ function App() {
     </div>
   );
 }
-
-export default App;

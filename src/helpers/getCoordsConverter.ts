@@ -1,5 +1,5 @@
 import { CalibrationState } from "../reducers/calibrationReducer";
-import { XY } from "./types";
+import XY from "../types/XY";
 
 interface LinearInterpValues {
   x: number;
