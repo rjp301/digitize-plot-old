@@ -14,7 +14,7 @@ export default function Bullseye({
   const ref = useRef<HTMLDivElement>(null);
 
   const imgUrl = stageRef.current ? stageRef.current.toDataURL() : "";
-  const zoom = 5;
+  const zoom = 3;
   const x = mouseState.x;
   const y = mouseState.y;
   const w = ref.current ? ref.current.offsetWidth / 2 : 0;
@@ -27,8 +27,8 @@ export default function Bullseye({
       style={{
         backgroundImage: `url(${imgUrl})`,
         backgroundRepeat: "no-repeat",
-        backgroundSize: `${image.width * zoom}px ${image.height * zoom}}px`,
-        backgroundPosition: `${w - x}px ${h - y}px`,
+        backgroundSize: `${image.width * zoom}px auto`,
+        backgroundPosition: `${w - x * zoom}px ${h - y * zoom}px`,
       }}
     >
       {/* {stageRef.current && (
