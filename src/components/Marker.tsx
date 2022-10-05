@@ -20,7 +20,7 @@ export default function Marker(props: any) {
         setIsDragging(false);
       }}
     >
-      {marker.label && <Text text={marker.label} x={10} />}
+      {marker.label && <Text text={marker.label} x={-7} y={-25} />}
       {showCoords && (
         <>
           <Text text={"X: " + marker.x} y={-35} x={-10} align="center" />

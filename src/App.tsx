@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 
 import DataTable from "./components/DataTable";
 import Calibrate from "./components/Calibrate";
@@ -28,22 +28,22 @@ function App() {
   } = useMarkers();
 
   const coordsConverter = getCoordsConverter(calibrationState);
+  const stageRef = useRef(null);
 
   return (
     <div className="App h-screen flex flex-row overflow-hidden">
-      <div className="w-60 flex flex-col shadow z-20 bg-white p-4">
+      <div className="w-80 flex flex-col shadow z-20 bg-white p-4 overflow-auto">
         <DataTable data={markerState} coordsConverter={coordsConverter} />
       </div>
 
       <div className="flex-grow h-screen w-full flex items-center justify-center bg-gray-50 ">
         <Stage
+          ref={stageRef}
           width={400}
           height={400}
           onClick={onLeftClickCanvas}
           onMouseMove={onMouseMoveOverCanvas}
-          onContextMenu={(e) => {
-            e.evt.preventDefault();
-          }}
+          onContextMenu={(e) => e.evt.preventDefault()}
           className="bg-white shadow"
         >
           <Layer>
@@ -55,7 +55,6 @@ function App() {
                   key={id}
                   marker={marker}
                   onDragEnd={onCalibrationPositionUpdate}
-                  showCoords
                   label={marker.label}
                 />
               );
@@ -69,16 +68,14 @@ function App() {
                 marker={marker}
                 onDragEnd={onDragEndMarker}
                 onRightClick={onRightClickMarker}
-                showCoords
-                label="coords"
               />
             ))}
           </Layer>
         </Stage>
       </div>
 
-      <div className="w-60 flex flex-col shadow z-20">
-        <Bullseye />
+      <div className="w-80 flex flex-col shadow z-20">
+        <Bullseye stageRef={stageRef} />
         <MouseCoords coords={mouseState} />
         <Calibrate
           state={calibrationState}

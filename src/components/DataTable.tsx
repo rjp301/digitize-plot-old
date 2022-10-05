@@ -9,9 +9,8 @@ export default function DataTable(props: {
 
   return (
     <table>
-      <thead>
+      <thead className="border-b-2">
         <tr>
-          <th>I</th>
           <th>X</th>
           <th>Y</th>
         </tr>
@@ -19,9 +18,8 @@ export default function DataTable(props: {
       <tbody className="text-sm">
         {data.map((row, index) => (
           <tr key={index}>
-            <td>{row.id.substring(10,5)}</td>
-            <td>{row.x}</td>
-            <td>{row.y}</td>
+            <td className="text-center">{row.x}</td>
+            <td className="text-center">{row.y}</td>
           </tr>
         ))}
       </tbody>
