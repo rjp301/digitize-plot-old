@@ -6,6 +6,8 @@ export default function DataTable(props: {
   coordsConverter: (coords: XY) => XY;
 }) {
   const { data, coordsConverter } = props;
+  const toString = (num: number) =>
+    num.toLocaleString(undefined, { minimumFractionDigits: 2 });
 
   return (
     <table>
@@ -16,12 +18,15 @@ export default function DataTable(props: {
         </tr>
       </thead>
       <tbody className="text-sm">
-        {data.map((row, index) => (
-          <tr key={index}>
-            <td className="text-center">{row.x}</td>
-            <td className="text-center">{row.y}</td>
-          </tr>
-        ))}
+        {data.map((row, index) => {
+          const { x, y } = coordsConverter(row);
+          return (
+            <tr key={index}>
+              <td className="text-center">{toString(x)}</td>
+              <td className="text-center">{toString(y)}</td>
+            </tr>
+          );
+        })}
       </tbody>
     </table>
   );

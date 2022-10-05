@@ -40,10 +40,6 @@ export default function App() {
   const coordsConverter = getCoordsConverter(calibrationState);
   const stageRef = useRef(null);
 
-  useEffect(() => {
-    console.log(image);
-  }, [image]);
-
   return (
     <div className="App h-screen flex flex-row overflow-hidden">
       <div className="w-80 flex flex-col shadow z-20 bg-white p-4 overflow-auto">
@@ -98,7 +94,7 @@ export default function App() {
 
       <div className="w-80 flex flex-col shadow z-20">
         <Bullseye stageRef={stageRef} mouseState={mouseState} image={image} />
-        <MouseCoords coords={mouseState} />
+        <MouseCoords coords={mouseState} coordsConverter={coordsConverter} />
         <Calibrate
           state={calibrationState}
           onUpdateValue={onCalibrationValueUpdate}

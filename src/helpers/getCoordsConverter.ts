@@ -11,32 +11,28 @@ interface LinearInterpValues {
 
 function linearInterp(values: LinearInterpValues): number {
   const { x, x0, x1, y0, y1 } = values;
-  return ((y1 - y0) * (x - x0)) / (x1 - x0) + y0;
+  if ([x0, x1].some((i) => i === 0)) return 0;
+  return y0 + ((y1 - y0) * (x - x0)) / (x1 - x0);
 }
 
 export default function getCoordsConverter(
   state: CalibrationState
 ): (coords: XY) => XY {
   return (coords: XY) => {
-    const markerX1 = state.x1;
-    const markerX2 = state.x2;
-    const markerY1 = state.y1;
-    const markerY2 = state.y2;
-
     const xValues = {
       x: coords.x,
-      x0: markerX1.value,
-      x1: markerX2.value,
-      y0: markerX1.x,
-      y1: markerX2.x,
+      x0: state.x1.x,
+      x1: state.x2.x,
+      y0: parseFloat(state.x1.value),
+      y1: parseFloat(state.x2.value),
     };
 
     const yValues = {
       x: coords.y,
-      x0: markerY1.value,
-      x1: markerY2.value,
-      y0: markerY1.y,
-      y1: markerY2.y,
+      x0: state.y1.y,
+      x1: state.y2.y,
+      y0: parseFloat(state.y1.value),
+      y1: parseFloat(state.y2.value),
     };
 
     return {

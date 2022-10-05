@@ -31,17 +31,6 @@ export default function Bullseye({
         backgroundPosition: `${w - x * zoom}px ${h - y * zoom}px`,
       }}
     >
-      {/* {stageRef.current && (
-        <img
-          src={stageRef.current.toDataURL()}
-          alt="Thumbnail"
-          className="h-auto w-auto"
-          style={{
-            scale: 5,
-            // transformOrigin: `${mouseState.x} ${mouseState.y}`,
-          }}
-        />
-      )} */}
       <div className="absolute top-1/2 -translate-y-1/2 h-px w-full bg-gray-500 opacity-50" />
       <div className="absolute left-1/2 -translate-x-1/2 w-px h-full bg-gray-500 opacity-50" />
       <div className="absolute left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 bg-gray-700 h-1 w-1 rounded-full" />
