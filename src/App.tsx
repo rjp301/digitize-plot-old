@@ -1,10 +1,9 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 
 import DataTable from "./components/DataTable";
 import Calibrate from "./components/Calibrate";
 import { Stage, Layer, Image } from "react-konva";
 import Bullseye from "./components/Bullseye";
-import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 
 import MouseCoords from "./components/MouseCoords";
 import getCoordsConverter from "./helpers/getCoordsConverter";
