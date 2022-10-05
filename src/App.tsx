@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 
 import DataTable from "./components/DataTable";
 import Calibrate from "./components/Calibrate";
-import { Stage, Layer } from "react-konva";
+import { Stage, Layer, Image } from "react-konva";
 import Bullseye from "./components/Bullseye";
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 
@@ -14,23 +14,8 @@ import useMouse from "./hooks/useMouse";
 import useMarkers from "./hooks/useMarkers";
 import Dropzone from "./components/Dropzone";
 
-import Image from "./types/Image";
-
-const loadImage = (setImageDimensions: any, imageUrl: string) => {
-  const img = new Image();
-  img.src = imageUrl;
-
-  img.onload = () => {
-    setImageDimensions({
-      height: img.height,
-      width: img.width,
-    });
-  };
-  img.onerror = (err) => {
-    console.log("img error");
-    console.error(err);
-  };
-};
+import ImageType from "./types/Image";
+import useImage from "use-image";
 
 export default function App() {
   const {
@@ -46,11 +31,12 @@ export default function App() {
     onDragEndMarker,
   } = useMarkers();
 
-  const [image, setImage] = useState<Image>({
+  const [image, setImage] = useState<ImageType>({
     width: 300,
     height: 300,
     src: "",
   });
+  const [domImage] = useImage(image.src);
   const coordsConverter = getCoordsConverter(calibrationState);
   const stageRef = useRef(null);
 
@@ -70,13 +56,17 @@ export default function App() {
         ) : (
           <Stage
             ref={stageRef}
-            width={400}
-            height={400}
+            imgSrc={image.src}
+            width={image.width}
+            height={image.height}
             onClick={onLeftClickCanvas}
             onMouseMove={onMouseMoveOverCanvas}
             onContextMenu={(e) => e.evt.preventDefault()}
             className="bg-white shadow"
           >
+            <Layer>
+              <Image image={domImage} />
+            </Layer>
             <Layer>
               {Object.keys(calibrationState).map((id) => {
                 const marker = (calibrationState as any)[id];
