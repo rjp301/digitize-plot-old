@@ -15,9 +15,11 @@ export default function Download({
     .map((marker) => ({ X: marker.x, Y: marker.y }));
 
   return (
-    <div>
+    <div className="flex justify-center">
       <CSVLink data={csvData} filename="digitize-plot.csv">
-        Download CSV
+        <button className="py-1 px-2 border-2 flex items-center justify-center">
+          Download CSV
+        </button>
       </CSVLink>
     </div>
   );

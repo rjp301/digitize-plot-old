@@ -43,7 +43,7 @@ export default function App() {
 
   return (
     <div className="App h-screen flex flex-row overflow-hidden">
-      <div className="w-80 flex flex-col shadow z-20 bg-white p-4 overflow-auto">
+      <div className="w-80 flex flex-col shadow z-20 bg-white p-4 overflow-auto gap-5">
         <Download data={markerState} coordsConverter={coordsConverter} />
         <DataTable data={markerState} coordsConverter={coordsConverter} />
       </div>
