@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 
 import DataTable from "./components/DataTable";
 import Calibrate from "./components/Calibrate";
@@ -12,6 +12,7 @@ import Marker from "./components/Marker";
 import useCalibration from "./hooks/useCalibration";
 import useMouse from "./hooks/useMouse";
 import useMarkers from "./hooks/useMarkers";
+import Dropzone from "./components/Dropzone";
 
 function App() {
   const {
@@ -27,6 +28,7 @@ function App() {
     onDragEndMarker,
   } = useMarkers();
 
+  const [files, setFiles] = useState<File[]>([]);
   const coordsConverter = getCoordsConverter(calibrationState);
   const stageRef = useRef(null);
 
@@ -37,41 +39,45 @@ function App() {
       </div>
 
       <div className="flex-grow h-screen w-full flex items-center justify-center bg-gray-50 ">
-        <Stage
-          ref={stageRef}
-          width={400}
-          height={400}
-          onClick={onLeftClickCanvas}
-          onMouseMove={onMouseMoveOverCanvas}
-          onContextMenu={(e) => e.evt.preventDefault()}
-          className="bg-white shadow"
-        >
-          <Layer>
-            {Object.keys(calibrationState).map((id) => {
-              const marker = (calibrationState as any)[id];
-              return (
-                <Marker
-                  id={id}
-                  key={id}
-                  marker={marker}
-                  onDragEnd={onCalibrationPositionUpdate}
-                  label={marker.label}
-                />
-              );
-            })}
-          </Layer>
+        {true ? (
+          <Dropzone files={files} setFiles={setFiles} />
+        ) : (
+          <Stage
+            ref={stageRef}
+            width={400}
+            height={400}
+            onClick={onLeftClickCanvas}
+            onMouseMove={onMouseMoveOverCanvas}
+            onContextMenu={(e) => e.evt.preventDefault()}
+            className="bg-white shadow"
+          >
+            <Layer>
+              {Object.keys(calibrationState).map((id) => {
+                const marker = (calibrationState as any)[id];
+                return (
+                  <Marker
+                    id={id}
+                    key={id}
+                    marker={marker}
+                    onDragEnd={onCalibrationPositionUpdate}
+                    label={marker.label}
+                  />
+                );
+              })}
+            </Layer>
 
-          <Layer>
-            {markerState.map((marker) => (
-              <Marker
-                key={marker.id}
-                marker={marker}
-                onDragEnd={onDragEndMarker}
-                onRightClick={onRightClickMarker}
-              />
-            ))}
-          </Layer>
-        </Stage>
+            <Layer>
+              {markerState.map((marker) => (
+                <Marker
+                  key={marker.id}
+                  marker={marker}
+                  onDragEnd={onDragEndMarker}
+                  onRightClick={onRightClickMarker}
+                />
+              ))}
+            </Layer>
+          </Stage>
+        )}
       </div>
 
       <div className="w-80 flex flex-col shadow z-20">
