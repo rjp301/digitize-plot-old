@@ -16,6 +16,7 @@ import Dropzone from "./components/Dropzone";
 
 import ImageType from "./types/Image";
 import useImage from "use-image";
+import Download from "./components/Download";
 
 export default function App() {
   const {
@@ -43,6 +44,7 @@ export default function App() {
   return (
     <div className="App h-screen flex flex-row overflow-hidden">
       <div className="w-80 flex flex-col shadow z-20 bg-white p-4 overflow-auto">
+        <Download data={markerState} coordsConverter={coordsConverter} />
         <DataTable data={markerState} coordsConverter={coordsConverter} />
       </div>
 

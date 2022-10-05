@@ -13,7 +13,6 @@ export default function useCalibration() {
   return {
     calibrationState,
     onCalibrationValueUpdate: (event: any, id: string) => {
-      console.log(calibrationState);
       dispatch(updateValue(event, id));
     },
 
