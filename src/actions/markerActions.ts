@@ -7,6 +7,7 @@ export interface MarkerAction {
   y: number;
 }
 
+
 export const types = {
   UPDATE_POSITION: "UPDATE_POSITION",
   ADD_MARKER: "ADD_MARKER",
