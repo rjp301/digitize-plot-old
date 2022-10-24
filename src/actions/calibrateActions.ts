@@ -1,3 +1,5 @@
+// actions pertaining to calibration markers (red and blue)
+
 export interface CalibrationAction {
   type: string;
   id: string;

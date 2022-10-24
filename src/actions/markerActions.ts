@@ -7,7 +7,6 @@ export interface MarkerAction {
   y: number;
 }
 
-
 export const types = {
   UPDATE_POSITION: "UPDATE_POSITION",
   ADD_MARKER: "ADD_MARKER",
@@ -23,7 +22,7 @@ export const updatePosition = (event: any): MarkerAction => ({
 
 export const addMarker = (event: any): MarkerAction => ({
   type: types.ADD_MARKER,
-  id: v1(),
+  id: v1(), // give each marker a unique id
   x: event.evt.layerX,
   y: event.evt.layerY,
 });
