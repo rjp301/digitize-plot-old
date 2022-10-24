@@ -10,14 +10,11 @@ This web app allows users to upload an image of a plot, calibrate an x and y sca
 
 ## How it Works
 
-There are many instances where data is available in only a chart format with an x and y axis and minimal labels.
+There are many instances where data is available in only a chart format with an x and y axis and minimal labels. The below is a prime example of this.
 
-![example plot](/images/BPL220K_24ft.png)
-
-This app allows users to upload an image of that chart, position two calibration points per axis, then place as many data points as they would like on the plot and export those data points. 
+![example plot](https://github.com/rjp301/digitize-plot/blob/a3575a7d7bffa3f95082dd20a085016e059c2cdd/docs/BPL220K%2024ft.png)
 
 ![example plot in app](https://github.com/rjp301/digitize-plot/blob/d6edcbf71fd572acbfa66e648f7173761f457fd7/docs/digitize_plot_app.png)
-
 
 ## How I Built It
 
